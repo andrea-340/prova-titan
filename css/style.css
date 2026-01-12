@@ -1,5 +1,5 @@
 /* =========================================
-   TITAN - OFFICIAL STYLE SHEET
+   TITAN - OFFICIAL STYLE SHEET (GIT READY)
    ========================================= */
 
 /* RESET E BASE */
@@ -7,7 +7,7 @@ body {
   margin: 0;
   padding: 0;
   min-height: 100vh;
-  /* Percorso corretto per file nella stessa cartella */
+  /* Modificato solo il percorso come richiesto */
   background: url("sfondo.png") no-repeat center center fixed;
   background-size: cover;
   font-family: sans-serif;
