@@ -10,7 +10,7 @@ body {
   /* Colore di sicurezza se l'immagine non carica */
   background-color: #0a0a0a; 
   /* Se lo sfondo è nella stessa cartella del CSS: */
-  background-image: url("sfondo.png");
+  background-image: url("images/sfondo.png");
   background-repeat: no-repeat;
   background-position: center center;
   background-attachment: fixed;
