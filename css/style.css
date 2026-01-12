@@ -1,4 +1,4 @@
- /* =========================================
+/* =========================================
    TITAN - OFFICIAL STYLE SHEET (GIT READY)
    ========================================= */
 
@@ -7,13 +7,13 @@ body {
   margin: 0;
   padding: 0;
   min-height: 100vh;
-  /* Se lo sfondo è nella stessa cartella del CSS, si scrive così: */
-  background: url("sfondo.png") no-repeat center center fixed;
-  background-size: cover;
-  font-family: sans-serif;
-  color: white;
-  overflow-x: hidden;
-}
+  /* Colore di sicurezza se l'immagine non carica */
+  background-color: #0a0a0a; 
+  /* Se lo sfondo è nella stessa cartella del CSS: */
+  background-image: url("sfondo.png");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-attachment: fixed;
   background-size: cover;
   font-family: sans-serif;
   color: white;
@@ -32,6 +32,8 @@ header {
   top: 0;
   z-index: 2000;
 }
+
+/* ... Tutto il resto del tuo codice va bene così com'è ... */
 
 .logo-text {
   color: white;
