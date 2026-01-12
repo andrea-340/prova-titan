@@ -1,9 +1,14 @@
+ /* =========================================
+   TITAN - OFFICIAL STYLE SHEET (GIT READY)
+   ========================================= */
+
 /* RESET E BASE */
 body {
   margin: 0;
   padding: 0;
   min-height: 100vh;
-  background: url("../../images/sfondo.png") no-repeat center center fixed;
+  /* CORRETTO: Un solo ../ per uscire da css/ e andare in images/ */
+  background: url("../images/sfondo.png") no-repeat center center fixed;
   background-size: cover;
   font-family: sans-serif;
   color: white;
@@ -37,6 +42,7 @@ header {
   margin: 0;
   padding: 0;
 }
+
 .menu li a {
   color: white !important;
   text-decoration: none !important;
@@ -45,6 +51,7 @@ header {
   font-size: 0.9rem;
   transition: 0.3s;
 }
+
 .menu li a:hover {
   color: #ff4d4d !important;
 }
@@ -54,11 +61,13 @@ header {
   align-items: center;
   gap: 20px;
 }
+
 .cart-box {
   position: relative;
   font-size: 1.5rem;
   cursor: pointer;
 }
+
 #cart-count {
   background: #ff4d4d;
   color: white;
@@ -76,6 +85,7 @@ header {
   padding: 5px 15px;
   border-radius: 5px;
 }
+
 .logout-button a {
   color: #ff4d4d !important;
   text-decoration: none;
@@ -94,14 +104,10 @@ header {
   filter: drop-shadow(4px 4px 0px #610303);
   animation: titanStrong 3s infinite;
 }
+
 @keyframes titanStrong {
-  0%,
-  100% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.05);
-  }
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
 }
 
 /* FORM E CONTENUTI */
@@ -114,9 +120,11 @@ header {
   border-radius: 15px;
   border: 1px solid #333;
 }
+
 .form-group {
   margin-bottom: 15px;
 }
+
 .form-group input,
 .form-group select {
   width: 100%;
@@ -125,6 +133,7 @@ header {
   border: none;
   box-sizing: border-box;
 }
+
 .submit-button {
   width: 100%;
   padding: 15px;
@@ -145,21 +154,21 @@ header {
   overflow: hidden;
   border-radius: 15px;
 }
+
 .slides img {
   width: 100%;
-  height: 400px;
+  height: 500px;
   object-fit: cover;
   display: none;
-  height: 500px; /* Alza un po' l'altezza se serve */
-  object-fit: cover; /* Fondamentale: non schiaccia l'immagine */
-  filter: brightness(0.7) contrast(1.2); /* Rende tutto più dark e cattivo */
+  filter: brightness(0.7) contrast(1.2);
   transition: transform 0.5s ease-in-out;
 }
+
 .slides img.active {
   display: block;
 }
-.prev,
-.next {
+
+.prev, .next {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
@@ -171,12 +180,9 @@ header {
   border-radius: 50%;
   z-index: 10;
 }
-.next {
-  right: 10px;
-}
-.prev {
-  left: 10px;
-}
+
+.next { right: 10px; }
+.prev { left: 10px; }
 
 /* FOOTER */
 .footer-info {
@@ -185,6 +191,7 @@ header {
   padding: 50px 5%;
   margin-top: 50px;
 }
+
 .footer-container {
   display: flex;
   flex-wrap: wrap;
@@ -193,25 +200,31 @@ header {
   max-width: 1100px;
   margin: 0 auto;
 }
+
 .footer-box {
   flex: 1;
   min-width: 250px;
 }
+
 .footer-box h4 {
   color: #ff4d4d;
   margin-bottom: 20px;
 }
+
 .footer-box ul {
   list-style: none;
   padding: 0;
 }
+
 .footer-box ul li a {
   color: #ccc !important;
   text-decoration: none;
 }
+
 .footer-box ul li a:hover {
   color: white !important;
 }
+
 .social-links a {
   color: white !important;
   text-decoration: none;
@@ -224,6 +237,7 @@ header {
   flex-direction: column;
   gap: 5px;
 }
+
 .menu-toggle .bar {
   width: 25px;
   height: 3px;
@@ -231,9 +245,7 @@ header {
 }
 
 @media (max-width: 768px) {
-  .menu-toggle {
-    display: flex;
-  }
+  .menu-toggle { display: flex; }
   .navbar {
     display: none;
     position: absolute;
@@ -243,9 +255,7 @@ header {
     background: black;
     padding: 20px;
   }
-  .navbar.active {
-    display: block;
-  }
+  .navbar.active { display: block; }
   .menu {
     flex-direction: column;
     align-items: center;
@@ -254,11 +264,10 @@ header {
     text-align: center;
     justify-content: center;
   }
-  .slides img {
-    height: 250px;
-  }
+  .slides img { height: 250px; }
 }
-/* Stile Bolla Chat */
+
+/* CHATBOT */
 #chat-bubble {
   position: fixed;
   bottom: 20px;
@@ -277,7 +286,6 @@ header {
   z-index: 3000;
 }
 
-/* Container Chat */
 #chatbot-container {
   position: fixed;
   bottom: 90px;
@@ -286,7 +294,7 @@ header {
   background: #111;
   border: 1px solid #333;
   border-radius: 15px;
-  display: none; /* Inizialmente nascosto */
+  display: none;
   flex-direction: column;
   overflow: hidden;
   z-index: 3000;
@@ -317,6 +325,7 @@ header {
   border-radius: 10px;
   border-left: 3px solid #ff4d4d;
 }
+
 .user-msg {
   background: #444;
   padding: 10px;
