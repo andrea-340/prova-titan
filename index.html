@@ -1,146 +1,80 @@
 <!DOCTYPE html>
 <html lang="it">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>TITAN | Training & Shop</title>
-    <link rel="icon" type="image/x-icon" href="images/favico.ico" />
-    <link rel="stylesheet" href="css/style.css" />
-  </head>
-  <body>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TITAN - Beyond Limits</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
     <header>
-      <div class="logo-area">
-        <h1 class="logo-text">TITAN</h1>
-      </div>
-
-      <div class="menu-toggle" id="mobile-menu">
-        <span class="bar"></span>
-        <span class="bar"></span>
-        <span class="bar"></span>
-      </div>
-
-      <nav class="navbar" id="nav-menu">
-        <ul class="menu">
-          <li><a href="#" id="nav-home">Home</a></li>
-          <li><a href="#" id="nav-about">Chi Siamo</a></li>
-          <li><a href="#" id="nav-shop">Shop</a></li>
-          <li><a href="#" id="nav-work">Lavora con Noi</a></li>
-        </ul>
-      </nav>
-
-      <div class="header-right">
-        <div id="cart-container" class="cart-box">
-          <span id="cart-icon">🛒</span>
-          <span id="cart-count">0</span>
+        <div class="logo">
+            <h1 class="logo-text">TITAN</h1>
         </div>
-        <button class="logout-button">
-          <a href="index.html" style="text-decoration: none; color: inherit;">Log-out</a>
-        </button>
-      </div>
+        <nav id="navbar">
+            <ul class="menu" id="nav-menu">
+                <li><a href="#" onclick="location.reload()">Home</a></li>
+                <li><a href="#" onclick="mostraShop()">Shop</a></li>
+                <li><a href="#">Contatti</a></li>
+            </ul>
+        </nav>
+        <div class="header-right">
+            <div class="cart-box">
+                🛒<span id="cart-count">0</span>
+            </div>
+            <div class="logout-button">
+                <a href="#" onclick="location.reload()">LOGOUT</a>
+            </div>
+        </div>
     </header>
 
-    <div id="back-button-container" style="display: none; padding: 10px 5%">
-      <button id="btn-back" class="submit-button" style="width: auto">
-        ⬅ Indietro
-      </button>
-    </div>
+    <main>
+        <h1 class="h1">TITAN</h1>
 
-    <h1 class="h1">TITAN</h1>
+        <div id="home1">
+            <h2 style="text-align:center;">REGISTRAZIONE</h2>
+            <div class="form-group">
+                <input type="text" id="reg-nome" placeholder="Nome Completo">
+            </div>
+            <div class="form-group">
+                <input type="email" id="reg-email" placeholder="Email">
+            </div>
+            <div class="form-group">
+                <input type="password" id="reg-pass" placeholder="Password">
+            </div>
+            <button class="submit-button" onclick="mostraHomeUtente()">REGISTRATI</button>
+            <p style="text-align:center; font-size:0.8rem; margin-top:10px;">
+                Hai già un account? <a href="#" style="color:#ff4d4d;">Accedi</a>
+            </p>
+        </div>
 
-    <main id="home1">
-      <form id="registerForm" class="register-form">
-        <h2 style="text-align: center">Registrati</h2>
-        <div class="form-group">
-          <label>Nome</label>
-          <input type="text" id="inputNome" required />
+        <div class="carousel">
+            <div class="slides">
+                <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=2070" class="active">
+                <img src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?q=80&w=2070">
+            </div>
+            <button class="prev" onclick="plusSlides(-1)">&#10094;</button>
+            <button class="next" onclick="plusSlides(1)">&#10095;</button>
         </div>
-        <div class="form-group">
-          <label>Email</label>
-          <input type="email" id="inputEmail" required />
-        </div>
-        <div class="form-group">
-          <label>Password</label>
-          <input type="password" id="inputPass" required />
-        </div>
-        <button class="submit-button" type="submit">Registrati Ora</button>
-      </form>
     </main>
-
-    <div id="chatbot-container">
-      <div id="chatbot-header">
-        <span>TITAN Assistant 🤖</span>
-        <button id="close-chat">×</button>
-      </div>
-      <div id="chatbot-messages">
-        <div class="bot-msg">
-          Ciao! Sono il tuo assistente TITAN. Come posso aiutarti oggi?
-        </div>
-      </div>
-      <div id="chatbot-options">
-        <button onclick="chatResponse('scheda')">Scheda Gratuita</button>
-        <button onclick="chatResponse('professionale')">Piani Pro</button>
-        <button onclick="chatResponse('gare')">Preparazione Gare</button>
-        <button onclick="chatResponse('contatto')">Parla con un Coach</button>
-      </div>
-    </div>
 
     <div id="chat-bubble">💬</div>
 
-    <section class="carousel-section">
-      <div class="carousel">
-        <div class="slides">
-          <img src="images/cris.png" />
-          <img src="images/imgts.jpg" />
-          <img src="images/1.jpg" />
-          <img src="images/2.jpg" />
-          <img src="images/3.png" />
-          <img src="images/4.jpg" />
-          <img src="images/images-1.jpg" />
-          <img src="images/images-2.jpg" />
-          <img src="images/images-3.jpg" />
-          <img src="images/images-4.png" />
+    <div id="chatbot-container">
+        <div id="chatbot-header">
+            <span>Titan Assistant</span>
+            <button id="close-chat">&times;</button>
         </div>
-        <button class="prev">&#10094;</button>
-        <button class="next">&#10095;</button>
-      </div>
-    </section>
-
-    <footer class="footer-info">
-      <div class="footer-container">
-        <div class="footer-box">
-          <h4>ASSISTENZA</h4>
-          <ul>
-            <li><a href="#">Centro Aiuto</a></li>
-            <li><a href="#">FAQ</a></li>
-            <li><a href="#">Termini</a></li>
-          </ul>
+        <div id="chatbot-messages">
+            <div class="bot-msg">Benvenuto in TITAN! Come posso aiutarti?</div>
         </div>
-        <div class="footer-box">
-          <h4>CONTATTI</h4>
-          <p>📧 altomarea59@gmail.com</p>
-          <p>📞 +39 342 501 5092</p>
-          <p>📍 Santo Stefano di Rogliano (CS)</p>
+        <div id="chatbot-options">
+            <button onclick="chatResponse('scheda')">Scheda Allenamento</button>
+            <button onclick="chatResponse('contatto')">Parla con un Coach</button>
         </div>
-        <div class="footer-box">
-          <h4>SOCIAL</h4>
-          <div class="social-links">
-            <a href="#">Instagram</a> | <a href="#">Facebook</a> |
-            <a href="#">TikTok</a>
-          </div>
-        </div>
-      </div>
-      
-      <div class="footer-motto" style="text-align: center; margin-top: 30px; border-top: 1px solid #444; padding-top: 20px;">
-        <h3 style="color: #ff4d4d; letter-spacing: 2px;">NO PAIN, NO GAIN.</h3>
-        <p style="font-style: italic; color: #ccc;">"Chi inizia con TITAN non molla mai. Diventa una leggenda."</p>
-      </div>
-
-      <div class="footer-bottom">
-        <p>&copy; 2026 TITAN Fitness</p>
-      </div>
-    </footer>
+    </div>
 
     <script src="js/main.js"></script>
-    <script src="js/script.js"></script>
-  </body>
+</body>
 </html>
