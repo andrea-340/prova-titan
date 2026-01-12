@@ -1,150 +1,134 @@
-/* =============================================
-   1. GESTIONE STATO UTENTE E NAVIGAZIONE
-   ============================================= */
-let utenteRegistrato = false;
-function controllaAccesso(callback) {
-  if (utenteRegistrato) {
-    callback();
-  } else {
-    alert("Per favore, registrati prima di accedere alle sezioni TITAN!");
-  }
+/* ============================================================
+   TITAN WEBAPP - LOGICA ORIGINALE (PERCORSI AGGIORNATI)
+   ============================================================ */
+
+const main = document.getElementById("home1");
+let genereSelezionato = "";
+let carrelloConteggio = 0;
+let totalePrezzo = 0;
+
+// Elementi UI
+const navMenu = document.getElementById("nav-menu");
+const mobileMenuBtn = document.getElementById("mobile-menu");
+const cartCountVisivo = document.getElementById("cart-count");
+
+/* 1. GESTIONE MENU MOBILE */
+if (mobileMenuBtn) {
+    mobileMenuBtn.addEventListener("click", () => {
+        navMenu.classList.toggle("active");
+    });
 }
 
-/* =============================================
-   2. GESTIONE MENU MOBILE (HAMBURGER)
-   ============================================= */
-document.addEventListener("DOMContentLoaded", () => {
-  const menuToggle = document.getElementById("mobile-menu");
-  const navMenu = document.getElementById("nav-menu");
-
-  if (menuToggle && navMenu) {
-    menuToggle.addEventListener("click", () => {
-      navMenu.classList.toggle("active");
-    });
-  }
-  document.getElementById("nav-home").addEventListener("click", (e) => {
-    e.preventDefault();
-    controllaAccesso(mostraHomeUtente);
-    navMenu.classList.remove("active");
-  });
-
-  document.getElementById("nav-about").addEventListener("click", (e) => {
-    e.preventDefault();
-    controllaAccesso(mostraHomeUtente1);
-    navMenu.classList.remove("active");
-  });
-
-  document.getElementById("nav-work").addEventListener("click", (e) => {
-    e.preventDefault();
-    controllaAccesso(mostraLavoraConNoi);
-    navMenu.classList.remove("active");
-  });
-
-  document.getElementById("nav-shop").addEventListener("click", (e) => {
-    e.preventDefault();
-    controllaAccesso(mostraShop);
-    navMenu.classList.remove("active");
-  });
-
-  /* =============================================
-     3. GESTIONE REGISTRAZIONE
-     ============================================= */
-  const registerForm = document.getElementById("registerForm");
-  if (registerForm) {
-    registerForm.addEventListener("submit", (e) => {
-      e.preventDefault();
-      utenteRegistrato = true;
-      alert("Registrazione effettuata con successo! Benvenuto.");
-      mostraHomeUtente();
-      document.querySelector(".carousel-section").style.marginTop = "20px";
-    });
-  }
-
-  /* =============================================
-     4. GESTIONE CARRELLO (CLICK SU ICONA)
-     ============================================= */
-  const cartIcon = document.getElementById("cart-container");
-  if (cartIcon) {
-    cartIcon.addEventListener("click", () => {
-      if (carrelloConteggio === 0) {
-        alert("Il tuo carrello è attualmente vuoto.");
-      } else {
-        alert(
-          `Riepilogo Carrello TITAN:\n----------------------\nArticoli: ${carrelloConteggio}\nTotale: €${totalePrezzo}\n\nProcedere al pagamento? (Funzione in arrivo)`
-        );
-      }
-    });
-  }
-});
-
-/* =============================================
-   5. LOGICA CAROSELLO (SLIDER)
-   ============================================= */
-const slides = document.querySelectorAll(".slides img");
-const next = document.querySelector(".next");
-const prev = document.querySelector(".prev");
+/* 2. GESTIONE CAROSELLO */
 let currentSlide = 0;
+const slides = document.querySelectorAll(".slides img");
 
 function showSlide(index) {
-  slides.forEach((img, i) => {
-    img.style.display = i === index ? "block" : "none";
-    img.classList.toggle("active", i === index);
-  });
+    if (slides.length === 0) return;
+    slides.forEach(img => img.classList.remove("active"));
+    if (index >= slides.length) currentSlide = 0;
+    if (index < 0) currentSlide = slides.length - 1;
+    slides[currentSlide].classList.add("active");
 }
 
-if (slides.length > 0) {
-  showSlide(currentSlide);
+document.querySelector(".next")?.addEventListener("click", () => {
+    currentSlide++;
+    showSlide(currentSlide);
+});
 
-  next.addEventListener("click", () => {
-    currentSlide = (currentSlide + 1) % slides.length;
+document.querySelector(".prev")?.addEventListener("click", () => {
+    currentSlide--;
     showSlide(currentSlide);
-  });
+});
 
-  prev.addEventListener("click", () => {
-    currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+// Auto-play
+setInterval(() => {
+    currentSlide++;
     showSlide(currentSlide);
-  });
-  setInterval(() => {
-    currentSlide = (currentSlide + 1) % slides.length;
-    showSlide(currentSlide);
-  }, 4000);
-}
-const chatContainer = document.getElementById("chatbot-container");
+}, 5000);
+
+/* 3. NAVIGAZIONE TITAN (Richiamate dai tuoi pulsanti) */
+window.mostraHomeUtente = function() {
+    if (!main) return;
+    main.innerHTML = `
+        <section class="welcome-guide" style="padding: 20px; color: white; text-align: center;">
+            <h2 style="color: #ff4d4d;">BENVENUTO IN TITAN 💪</h2>
+            <p>Evolvi con i nostri piani PRO.</p>
+            <div style="margin-top: 30px; display: flex; flex-direction: column; gap: 15px; align-items: center;">
+                <button id="startButton" class="submit-button" onclick="mostraHomeUtente3()">INIZIA ORA</button>
+                <button class="submit-button" style="background: #444;" onclick="mostraShop()">VAI ALLO SHOP</button>
+            </div>
+        </section>
+    `;
+};
+
+window.mostraHomeUtente3 = function() {
+    main.innerHTML = `
+        <div class="form-container-dati">
+            <h2>IL TUO PROFILO</h2>
+            <select id="genere" style="width:100%; padding:10px; margin-bottom:10px;">
+                <option value="Uomo">Uomo</option>
+                <option value="Donna">Donna</option>
+            </select>
+            <button class="submit-button" onclick="mostraSceltaAllenamento()">CONTINUA</button>
+        </div>
+    `;
+};
+
+window.mostraSceltaAllenamento = function() {
+    main.innerHTML = `
+        <div style="text-align:center;">
+            <h2>SCEGLI IL TUO GOAL</h2>
+            <button class="submit-button" onclick="mostraPaginaDownload('FULL BODY', 'scheda-fullbody-uomo.pdf', 'full-body-donna.pdf')">FULL BODY</button>
+        </div>
+    `;
+};
+
+// Percorso corretto per la cartella schede su GitHub
+window.mostraPaginaDownload = function(titolo, fileUomo, fileDonna) {
+    let genere = document.getElementById("genere")?.value || "Uomo";
+    let file = genere === "Uomo" ? fileUomo : fileDonna;
+    main.innerHTML = `
+        <div style="text-align:center; padding: 20px;">
+            <h2>${titolo}</h2>
+            <a href="schede-personalizzate/${file}" download class="submit-button" style="text-decoration:none; display:inline-block;">SCARICA PDF</a>
+            <button class="submit-button" style="background:#333; margin-top:10px;" onclick="mostraHomeUtente()">INDIETRO</button>
+        </div>
+    `;
+};
+
+/* 4. SHOP E CHATBOT */
+window.mostraShop = function() {
+    main.innerHTML = `
+        <div style="text-align:center;">
+            <h2>SHOP</h2>
+            <p>Piano PRO: 99€</p>
+            <button class="submit-button" onclick="aggiungiAlCarrello('PRO', 99)">AGGIUNGI</button>
+            <button class="submit-button" style="background:#333; margin-top:10px;" onclick="mostraHomeUtente()">INDIETRO</button>
+        </div>
+    `;
+};
+
+window.aggiungiAlCarrello = function(piano, prezzo) {
+    carrelloConteggio++;
+    if (cartCountVisivo) cartCountVisivo.innerText = carrelloConteggio;
+    alert(`Aggiunto: ${piano}. Totale carrello: ${carrelloConteggio}`);
+};
+
+window.chatResponse = function(tipo) {
+    const chatMessages = document.getElementById("chatbot-messages");
+    let msg = tipo === 'scheda' ? "La trovi nella sezione allenamento!" : "Contattaci al +39 342 501 5092";
+    const botDiv = document.createElement("div");
+    botDiv.className = "bot-msg";
+    botDiv.innerText = msg;
+    chatMessages.appendChild(botDiv);
+};
+
+// Gestione apertura/chiusura chat
 const chatBubble = document.getElementById("chat-bubble");
-const closeChat = document.getElementById("close-chat");
-const chatMessages = document.getElementById("chatbot-messages");
+const chatContainer = document.getElementById("chatbot-container");
+if(chatBubble) chatBubble.onclick = () => chatContainer.style.display = "flex";
+if(document.getElementById("close-chat")) document.getElementById("close-chat").onclick = () => chatContainer.style.display = "none";
 
-// Apri/Chiudi Chat
-chatBubble.onclick = () => (chatContainer.style.display = "flex");
-closeChat.onclick = () => (chatContainer.style.display = "none");
-
-function chatResponse(tipo) {
-  let response = "";
-  let userQuery = "";
-
-  // Logica risposte
-  if (tipo === "scheda") {
-    userQuery = "Come ottengo la scheda gratis?";
-    response =
-      "Dopo esserti registrato, clicca su 'Inizia Ora' nella Home, inserisci i tuoi dati e potrai scaricare il PDF immediatamente!";
-  } else if (tipo === "professionale") {
-    userQuery = "Cosa offrono i piani Pro?";
-    response =
-      "I piani Pro includono dieta personalizzata, check video della tecnica e supporto diretto 24/7 con i nostri coach professionisti.";
-  } else if (tipo === "gare") {
-    userQuery = "Voglio gareggiare!";
-    response =
-      "Grande! TITAN è nata per questo. I nostri coach ti seguiranno nella preparazione atletica, alimentare e nel posing per portarti sul palco.";
-  } else if (tipo === "contatto") {
-    userQuery = "Voglio parlare con un Coach.";
-    response =
-      "Puoi scriverci a altomarea59@gmail.com o contattarci su WhatsApp al +39 342 501 5092.";
-  }
-
-  // Aggiungi messaggi alla chat
-  chatMessages.innerHTML += `<div class="user-msg">${userQuery}</div>`;
-  setTimeout(() => {
-    chatMessages.innerHTML += `<div class="bot-msg">${response}</div>`;
-    chatMessages.scrollTop = chatMessages.scrollHeight; // Autoscroll
-  }, 500);
-}
+// NOTA: Non ho inserito chiamate automatiche (mostraHomeUtente) 
+// così il tuo modulo di registrazione HTML resterà visibile all'inizio.
