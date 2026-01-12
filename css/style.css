@@ -7,10 +7,12 @@ body {
   margin: 0;
   padding: 0;
   min-height: 100vh;
-  /* CORRETTO: Un solo ../ per uscire da css/ e andare in images/ */
-  body {
-  background: url("../images/sfondo.png") no-repeat center center fixed;
+  /* Se lo sfondo è nella stessa cartella del CSS, si scrive così: */
+  background: url("sfondo.png") no-repeat center center fixed;
   background-size: cover;
+  font-family: sans-serif;
+  color: white;
+  overflow-x: hidden;
 }
   background-size: cover;
   font-family: sans-serif;
